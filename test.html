@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rafli - Portofolio Sederhana</title>
+    <style>
+        /* Pengaturan Dasar Halaman */
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #111;
+            line-height: 1.6;
+        }
+
+        * {
+            font-weight: bold !important;
+        }
+
+        /* Kontainer Utama */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Gaya Header */
+        header {
+            text-align: center;
+            padding: 60px 20px;
+            background-color: #ffffff;
+            border-bottom: 1px solid #eee;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            letter-spacing: -2px;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: #888;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Gaya Section */
+        section {
+            padding: 60px 20px;
+        }
+        
+        section:nth-child(even) {
+            background-color: #ffffff;
+        }
+        
+        .section-content {
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #555;
+            margin-top: 0;
+            margin-bottom: 30px;
+        }
+
+        .section-description {
+            max-width: 800px;
+            margin: -10px auto 40px auto;
+            font-size: 1.1rem;
+            color: #555;
+        }
+        
+        .about-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        #about h2 {
+            text-align: left;
+        }
+
+        #about p {
+            text-align: justify;
+            color: #555;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .gallery {
+            display: grid;
+            gap: 5px; 
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 80%; 
+            object-fit: cover;
+            border-radius: 0; 
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery img:hover {
+            transform: scale(1.05);
+        }
+        
+        .aligned-section .section-header {
+            text-align: left;
+            padding: 0;
+        }
+        
+        #photography .aligned-section {
+            max-width: 85%;
+            margin: 0 auto;
+        }
+        
+        #photography .section-header h2 {
+            font-size: 2.2rem;
+        }
+
+        #photography .section-header .section-description {
+            font-size: 1rem;
+        }
+
+        #photography .gallery {
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+
+        #photography .gallery img {
+            animation: fadeIn 0.8s ease-out forwards;
+            opacity: 0;
+        }
+        
+        #photography .gallery img:nth-child(1) { animation-delay: 0.1s; }
+        #photography .gallery img:nth-child(2) { animation-delay: 0.2s; }
+        #photography .gallery img:nth-child(3) { animation-delay: 0.3s; }
+        #photography .gallery img:nth-child(4) { animation-delay: 0.4s; }
+
+        #clients .gallery, #street-photography .gallery {
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        /* Gaya GIF tambahan */
+        .gif-container {
+            margin-top: 20px; /* Memberi jarak dari galeri di atasnya */
+            padding: 10px; /* Memberi sedikit padding */
+            display: grid;
+            grid-template-columns: 1fr; /* Hanya satu kolom untuk gif */
+            gap: 5px; 
+        }
+        
+        .gif-container img {
+            width: 101%;
+            height: auto; 
+            object-fit: cover;
+            border-radius: 0; 
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s ease;
+        }
+        
+        /* (BARU/DIUBAH) Gaya untuk bagian Digital Marketing */
+        #digital-marketing {
+            text-align: left; /* Rata kiri */
+            display: flex; /* Menggunakan flexbox untuk tata letak */
+            align-items: center; /* Vertikal tengah */
+            justify-content: center; /* Horisontal tengah */
+            padding: 80px 20px; /* Padding lebih besar */
+        }
+
+        #digital-marketing .content-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: space-around; /* Jarak antara teks dan gambar */
+            max-width: 1000px; /* Lebar maksimal wrapper */
+            width: 100%;
+            flex-wrap: wrap; /* Agar responsif di layar kecil */
+        }
+
+        #digital-marketing .text-content {
+            max-width: 500px; /* Lebar maksimal teks */
+            margin-right: 40px; /* Jarak antara teks dan gambar */
+        }
+        
+        #digital-marketing h2 {
+            font-size: 3rem; /* Ukuran font lebih besar */
+            margin-bottom: 0; /* Hilangkan margin bawah */
+            line-height: 1; /* Atur tinggi baris */
+            letter-spacing: -1px;
+        }
+
+        #digital-marketing h3 {
+            font-size: 2rem; /* Ukuran font lebih besar */
+            margin-bottom: 20px;
+            color: #111;
+        }
+
+        #digital-marketing .digital-marketing-content p {
+            text-align: left; /* Teks paragraf rata kiri */
+            max-width: 100%; /* Pastikan mengisi lebar yang tersedia */
+            font-size: 1.1rem;
+            color: #555;
+            margin: 0; /* Hilangkan margin default */
+        }
+
+        #digital-marketing img {
+            max-width: 200px; /* Ukuran gambar disesuaikan */
+            width: 100%; /* Agar responsif */
+            border-radius: 40px;
+            box-shadow: 0 10px 50px -1px rgba(0,0,0,0.1);
+            margin-top: 0; /* Hilangkan margin atas */
+            flex-shrink: 0; /* Gambar tidak menyusut */
+        }
+        
+        /* Media Queries untuk responsif */
+        @media (max-width: 768px) {
+            #digital-marketing .content-wrapper {
+                flex-direction: column; /* Tumpuk ke bawah di layar kecil */
+                text-align: center;
+            }
+            #digital-marketing .text-content {
+                margin-right: 0;
+                margin-bottom: 40px; /* Tambah jarak bawah untuk teks */
+            }
+            #digital-marketing h2 {
+                font-size: 2.5rem;
+            }
+            #digital-marketing h3 {
+                font-size: 1.7rem;
+            }
+            #digital-marketing .digital-marketing-content p {
+                text-align: center;
+            }
+        }
+
+
+        .card-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background-color: #fff;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+            overflow: hidden;
+            width: 320px;
+            text-align: left;
+            transition: transform 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card img {
+            width: 100%;
+            height: 240px;
+            object-fit: cover;
+        }
+
+        .card-content {
+            padding: 20px 30px;
+        }
+
+        .card-content h3 {
+            margin-top: 0;
+            font-size: 1.25rem;
+            color: #111;
+        }
+
+        footer {
+            background-color: #111;
+            color: #fff;
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        footer h2 {
+            color: #fff;
+            margin-bottom: 20px;
+        }
+
+        footer p {
+            font-size: 1.2rem;
+            margin: 10px 0;
+        }
+        
+        footer a {
+            color: #fff;
+            text-decoration: none;
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Rafli - Portofolio</h1>
+            <p>Profesi dalam Design Graphic, Photography, Videography, dan Content Creator.</p>
+        </header>
+
+        <main>
+            <section id="about">
+                <div class="about-wrapper">
+                    <h2>Tentang Saya</h2>
+                    <p>
+                        Hai! Saya memiliki minat dan pengalaman di bidang desain grafis, fotografi, dan videografi. Saya senang menuangkan ide ke dalam bentuk visual, baik itu melalui desain, jepretan foto, maupun rekaman video. Saya menikmati proses kreatif dari awal hingga akhir untuk menciptakan sesuatu yang menarik secara visual.
+                    </p>
+                </div>
+            </section>
+            
+            <section id="digital-marketing">
+                 <div class="content-wrapper">
+                    <div class="text-content">
+                        <h2>DIGITAL MARKETING</h2>
+                        <h3>Tim kreatif @UnstableNetwork</h3>
+                        <p class="digital-marketing-content">
+                            Sebagai bagian dari @UnstableNetwork, saya bersama rekan mengembangkan project kreatif untuk melatih keterampilan digital marketing dan produksi konten.
+                        </p>
+                    </div>
+                     <img src="https://framerusercontent.com/images/KqJ5LL1HaCfzYALsDLrPopsSDp4.png" alt="Digital Marketing">
+                </div>
+            </section>
+
+            <section id="photography">
+                <div class="aligned-section">
+                    <div class="section-header">
+                        <h2>Photography & Videography</h2>
+                        <p class="section-description" style="margin-left: 0; margin-right: 0;">
+                            Fleksibel dengan berbagai gaya, mulai dari sinematik hingga branding content creator, ambience, photo product sesuai kebutuhan audiens dan tujuan visual.
+                        </p>
+                    </div>
+                    <div class="gallery">
+                        <img src="https://framerusercontent.com/images/asUfDvx0x7t1ZWSlG9vjEI1ISw.jpg" alt="Foto Karya 1">
+                        <img src="https://framerusercontent.com/images/VGVBZVKnbL5NDzUsDPl8O7DB0U.png" alt="Foto Karya 2">
+                        <img src="https://framerusercontent.com/images/NlFLXfgkmlTxAli8c09MnxAxxw.jpg" alt="Foto Karya 3">
+                        <img src="https://framerusercontent.com/images/dmBGqOzqnuGZkrTLj5QRMhPQUcU.jpg" alt="Foto Karya 4">
+                    </div>
+                    
+                    <div class="gif-container">
+                        <img src="https://framerusercontent.com/images/9JL9pOOXIlkbWG99aVVHezPm9Y.gif" alt="Videography Showcase">
+                    </div>
+                </div>
+            </section>
+            
+            <section id="clients">
+                <div class="section-content">
+                    <h2>Client & Project</h2>
+                     <div class="gallery">
+                        <img src="https://framerusercontent.com/images/t0waIa510qzClYB0YSQfaUXynM.jpg" alt="Proyek Luargaris 1">
+                        <img src="https://framerusercontent.com/images/s61mKTyVFcVCph1iGhhxpTBwI.jpg" alt="Proyek Luargaris 2">
+                        <img src="https://framerusercontent.com/images/QvYZfji9Ab3Avl59Vk2BkXWfu5o.jpg" alt="Proyek Luargaris 3">
+                        <img src="https://framerusercontent.com/images/joW5B9welyi0jgTERfiT4FUh8sA.webp" alt="Proyek FTW Coffee 1">
+                        <img src="https://framerusercontent.com/images/WFPV64xT1kbs3n87CzIkhYnIdhg.webp" alt="Proyek FTW Coffee 2">
+                        <img src="https://framerusercontent.com/images/DNLtDwCXYcs1H4CscwzPDyeQUmA.jpg" alt="Proyek FTW Coffee 3">
+                    </div>
+                </div>
+            </section>
+
+            <section id="street-photography">
+                <div class="section-content">
+                    <h2>Street Photography</h2>
+                    <div class="gallery">
+                        <img src="https://framerusercontent.com/images/WSepTsPQHY9iRZTbLVtFG3I3mhM.jpg" alt="Street Photo 1">
+                        <img src="https://framerusercontent.com/images/zja1MjA9iOD2YWRkoka3caDOpg.jpg" alt="Street Photo 2">
+                        <img src="https://framerusercontent.com/images/2zWOHqyKinFRP6er4kxy6RLf3s.jpg" alt="Street Photo 3">
+                        <img src="https://framerusercontent.com/images/qNWqsi0QbXv9fTY27cY8osyfNQI.png" alt="Street Photo 4">
+                        <img src="https://framerusercontent.com/images/l9xrM8JzALDYEKStMA0JhJWdjyE.jpg" alt="Street Photo 5">
+                        <img src="https://framerusercontent.com/images/SJxfQVPJkQ83POJvmQz2HudcMdw.jpg" alt="Street Photo 6">
+                    </div>
+                </div>
+            </section>
+
+            <section id="services">
+                <div class="section-content">
+                    <h2>Keahlian</h2>
+                    <div class="card-container">
+                        <div class="card">
+                            <img src="https://framerusercontent.com/images/VBrzb3r7pY2Sj4wMrNI6TDhjnA.png" alt="Desainer">
+                            <div class="card-content">
+                                <h3>Desainer / Commission Work</h3>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <img src="https://framerusercontent.com/images/7mIU4aa0sKdZB23WulBGGJQfJ2w.png" alt="Photography">
+                            <div class="card-content">
+                                <h3>Photography / Videography</h3>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <img src="https://framerusercontent.com/images/CGxQXhxepJpfUUKV5z8iB9pYlw.png" alt="Events">
+                            <div class="card-content">
+                                <h3>Events</h3>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <h2>Contact</h2>
+        <p>085278077957</p>
+        <p><a href="mailto:rafliardana.bisnis@gmail.com">rafliardana.bisnis@gmail.com</a></p>
+    </footer>
+
+</body>
+</html>
